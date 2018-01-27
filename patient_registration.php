@@ -4,17 +4,18 @@ $DBPassword = "password";
 $DBName = "phr_auth";
 $DBHost = "localhost";
 
-if(!isset($_GET['name']) || !isset($_GET['email']) || !isset($_GET['phone']) || !isset($_GET['password']) || !isset($_GET['region']) || !isset($_GET['province'])){
+if(!isset($_GET['fname']) || !isset($_GET['lname']) || !isset($_GET['email']) || !isset($_GET['phone']) || !isset($_GET['password']) || !isset($_GET['region']) || !isset($_GET['province'])){
 	die("Not Enough Information");
 }
 else{
-	$name = $_GET['name'];
+	$fname = $_GET['fname'];
+	$lname = $_GET['lname'];
 	$email = $_GET['email'];
 	$phone = $_GET['phone'];
 	$password = $_GET['password'];
 	$region = $_GET['region'];
 	$province = $_GET['province'];
-
+	$name = $fname." ".$lname;
 	//check the username here for invalid chars die if fail.
 }
 
@@ -24,7 +25,7 @@ if($con->connect_error){
 }
 $user_role="USER";
 $stmt = $con->prepare("insert into users (name, email, password, user_role, phone, region, province) values (?,?,?,?,?,?,?)");
-$stmt->bind_param("sssssss", $name, $email, $password, $user_role, $phone. $region, $province);
+$stmt->bind_param("sssssss", $name, $email, $password, $user_role, $phone, $region, $province);
 if($stmt->execute()){
 	echo "true";
 }
