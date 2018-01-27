@@ -30,9 +30,9 @@ while($stmt->fetch()){
 	$results[]=$row;
 	$count = $count+1;
 }
-$JSONUser = json_encode($results);
+$JSONObj = json_encode($results);
 
 $con->close();
 
-echo $JSONUser
+echo $JSONObj
 ?>

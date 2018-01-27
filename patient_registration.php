@@ -4,7 +4,7 @@ $DBPassword = "password";
 $DBName = "phr_auth";
 $DBHost = "localhost";
 
-if(!isset($_GET['name']) || !isset($_GET['email']) || !isset($_GET['phone']) || !isset($_GET['password'])){
+if(!isset($_GET['name']) || !isset($_GET['email']) || !isset($_GET['phone']) || !isset($_GET['password']) || !isset($_GET['region']) || !isset($_GET['province'])){
 	die("Not Enough Information");
 }
 else{
@@ -12,6 +12,8 @@ else{
 	$email = $_GET['email'];
 	$phone = $_GET['phone'];
 	$password = $_GET['password'];
+	$region = $_GET['region'];
+	$province = $_GET['province'];
 
 	//check the username here for invalid chars die if fail.
 }
@@ -21,8 +23,8 @@ if($con->connect_error){
 	die("Connection error: " .  $con->connect_error);
 }
 $user_role="USER";
-$stmt = $con->prepare("insert into users (name, email, password, user_role, phone) values (?,?,?,?,?)");
-$stmt->bind_param("sssss", $name, $email, $password, $user_role, $phone);
+$stmt = $con->prepare("insert into users (name, email, password, user_role, phone, region, province) values (?,?,?,?,?,?,?)");
+$stmt->bind_param("sssssss", $name, $email, $password, $user_role, $phone. $region, $province);
 if($stmt->execute()){
 	echo "true";
 }
