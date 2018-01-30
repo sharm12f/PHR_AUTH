@@ -15,7 +15,6 @@ else{
 	$password = $_GET['password'];
 	$region = $_GET['region'];
 	$province = $_GET['province'];
-	$name = $fname." ".$lname;
 	//check the username here for invalid chars die if fail.
 }
 
@@ -24,8 +23,8 @@ if($con->connect_error){
 	die("Connection error: " .  $con->connect_error);
 }
 $user_role="USER";
-$stmt = $con->prepare("insert into users (name, email, password, user_role, phone, region, province) values (?,?,?,?,?,?,?)");
-$stmt->bind_param("sssssss", $name, $email, $password, $user_role, $phone, $region, $province);
+$stmt = $con->prepare("insert into users (fname, lname, email, password, user_role, phone, region, province) values (?,?,?,?,?,?,?)");
+$stmt->bind_param("ssssssss", $fname, $lname, $email, $password, $user_role, $phone, $region, $province);
 if($stmt->execute()){
 	echo "true";
 }

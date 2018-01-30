@@ -18,10 +18,10 @@ if($con->connect_error){
 	die("Connection error: " .  $con->connect_error);
 }
 
-$stmt = $con->prepare("select id, email, create_time, user_role, fname, lname, phone, region, province from users where email=?");
+$stmt = $con->prepare("select id, email, create_time, user_role, fname, lname, phone, region, organization, department, health_professional from health_professional_user where email=?");
 $stmt->bind_param("s",$email);
 $stmt->execute();
-$stmt->bind_result($dbid, $dbemail, $dbcreate_time, $dbuser_role, $db_fname, $db_lname, $db_phone, $db_region, $db_province);
+$stmt->bind_result($dbid, $dbemail, $dbcreate_time, $dbuser_role, $db_fname, $db_lname, $db_phone, $db_region, $db_organization, $db_department, $db_health);
 $count = 0;
 while($stmt->fetch()){
 	$count=$count+1;
@@ -31,7 +31,7 @@ if($count!=1){
 	die ("Too many with same email");
 }
 
-$user = array('id'=>$dbid, 'email'=>$dbemail, 'create_time'=>$dbcreate_time, 'user_role'=>$dbuser_role, 'fname'=>$db_fname, 'lname'=>$db_lname, 'phone'=>$db_phone, 'region'=>$db_region, 'province'=>$db_province);
+$user = array('id'=>$dbid, 'email'=>$dbemail, 'create_time'=>$dbcreate_time, 'user_role'=>$dbuser_role, 'fname'=>$db_fname, 'lname'=>$db_lname, 'phone'=>$db_phone, 'region'=>$db_region, 'organization'=>$db_organization, 'department'=>$db_department, 'health_professional'=>$db_health);
 
 $JSONUser = json_encode($user);
 
