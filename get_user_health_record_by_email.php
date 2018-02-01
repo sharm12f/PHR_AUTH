@@ -1,8 +1,9 @@
 <?PHP
-$DBUserName = "app";
+$DBUserName = "sharm12f_app";
 $DBPassword = "password";
-$DBName = "phr_auth";
+$DBName = "sharm12f_PHRAUTH";
 $DBHost = "localhost";
+
 
 if(!isset($_GET['email'])){
 	die("No email");
@@ -17,7 +18,7 @@ $con = new mysqli($DBHost, $DBUserName, $DBPassword, $DBName);
 if($con->connect_error){
 	die("Connection error: " .  $con->connect_error);
 }
-$stmt = $con->prepare('select H.id, H.user_id, H.record, H.create_time, H.name from user_health_record as H, users as U where U.id = H.user_id and U.email = ?');
+$stmt = $con->prepare('SELECT H.ID, H.USER_ID, H.RECORD, H.CREATE_TIME, H.NAME FROM USER_HEALTH_RECORD AS H, USERS AS U WHERE U.ID = H.USER_ID AND U.EMAIL = ?');
 $stmt->bind_param("s",$email);
 $stmt->execute();
 $stmt->bind_result($rid, $uid, $record, $create_time, $db_name);

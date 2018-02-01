@@ -1,8 +1,9 @@
 <?PHP
-$DBUserName = "app";
+$DBUserName = "sharm12f_app";
 $DBPassword = "password";
-$DBName = "phr_auth";
+$DBName = "sharm12f_PHRAUTH";
 $DBHost = "localhost";
+
 
 if(!isset($_GET['fname']) || !isset($_GET['lname']) || !isset($_GET['email']) || !isset($_GET['phone']) || !isset($_GET['password']) || !isset($_GET['region']) || !isset($_GET['organization']) || !isset($_GET['department']) || !isset($_GET['health_professional'])){
 	die("Not Enough Information");
@@ -25,7 +26,7 @@ if($con->connect_error){
 	die("Connection error: " .  $con->connect_error);
 }
 $user_role="HP";
-$stmt = $con->prepare("insert into health_professional_user (fname, lname, email, password, user_role, phone, region, organization, department, health_professional) values (?,?,?,?,?,?,?,?,?,?)");
+$stmt = $con->prepare("INSERT INTO HEALTH_PROFESSIONAL_USER (FNAME, LNAME, EMAIL, PASSWORD, USER_ROLE, PHONE, REGION, ORGANIZATION, DEPARTMENT, HEALTH_PROFESSIONAL) VALUES (?,?,?,?,?,?,?,?,?,?)");
 $stmt->bind_param("ssssssssss", $fname, $lname, $email, $password, $user_role, $phone, $region, $organization, $department, $health_professional);
 if($stmt->execute()){
 	echo "true";

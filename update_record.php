@@ -1,8 +1,9 @@
 <?PHP
-$DBUserName = "app";
+$DBUserName = "sharm12f_app";
 $DBPassword = "password";
-$DBName = "phr_auth";
+$DBName = "sharm12f_PHRAUTH";
 $DBHost = "localhost";
+
 
 if(!isset($_GET['name']) || !isset($_GET['description']) || !isset($_GET['rid'])){
 	die("missing info");
@@ -19,7 +20,7 @@ if($con->connect_error){
 	die("Connection error: " .  $con->connect_error);
 }
 
-$stmt = $con->prepare("update user_health_record set name = ?, record = ? where id = ?");
+$stmt = $con->prepare("UPDATE USER_HEALTH_RECORD SET NAME = ?, RECORD = ? WHERE ID = ?");
 $stmt->bind_param("ssi",$name, $description, $rid);
 if($stmt->execute()){
 	echo "true";

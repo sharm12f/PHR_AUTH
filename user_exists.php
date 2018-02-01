@@ -1,8 +1,10 @@
 <?PHP
-$DBUserName = "app";
+$DBUserName = "sharm12f_app";
 $DBPassword = "password";
-$DBName = "phr_auth";
+$DBName = "sharm12f_PHRAUTH";
 $DBHost = "localhost";
+
+// Sample Url: user_exists.php?email=test@test.com
 
 if(!isset($_GET['email'])){
 	die("No email");
@@ -16,8 +18,7 @@ $con = new mysqli($DBHost, $DBUserName, $DBPassword, $DBName);
 if($con->connect_error){
 	die("Connection error: " .  $con->connect_error);
 }
-
-$stmt = $con->prepare("select count(email) from users where email=?");
+$stmt = $con->prepare("SELECT COUNT(EMAIL) FROM USERS WHERE EMAIL=?");
 $stmt->bind_param("s",$email);
 $stmt->execute();
 $stmt->bind_result($count);
@@ -26,4 +27,5 @@ if($count==1){
 	echo "true";
 }
 $con->close();
+
 ?>

@@ -1,15 +1,16 @@
 <?PHP
-$DBUserName = "app";
+$DBUserName = "sharm12f_app";
 $DBPassword = "password";
-$DBName = "phr_auth";
+$DBName = "sharm12f_PHRAUTH";
 $DBHost = "localhost";
+
 
 $con = new mysqli($DBHost, $DBUserName, $DBPassword, $DBName);
 if($con->connect_error){
 	die("Connection error: " .  $con->connect_error);
 }
 
-$stmt = $con->prepare("select name from organization");
+$stmt = $con->prepare("SELECT NAME FROM ORGANIZATION");
 $stmt->execute();
 $stmt->bind_result($dborganization);
 $count = 0;

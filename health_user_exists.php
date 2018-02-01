@@ -1,8 +1,9 @@
 <?PHP
-$DBUserName = "app";
+$DBUserName = "sharm12f_app";
 $DBPassword = "password";
-$DBName = "phr_auth";
+$DBName = "sharm12f_PHRAUTH";
 $DBHost = "localhost";
+
 
 if(!isset($_GET['email'])){
 	die("No email");
@@ -17,7 +18,7 @@ if($con->connect_error){
 	die("Connection error: " .  $con->connect_error);
 }
 
-$stmt = $con->prepare("select count(email) from health_professional_user where email=?");
+$stmt = $con->prepare("SELECT COUNT(EMAIL) FROM HEALTH_PROFESSIONAL_USER WHERE EMAIL=?");
 $stmt->bind_param("s",$email);
 $stmt->execute();
 $stmt->bind_result($count);

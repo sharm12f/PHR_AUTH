@@ -1,8 +1,9 @@
 <?PHP
-$DBUserName = "app";
+$DBUserName = "sharm12f_app";
 $DBPassword = "password";
-$DBName = "phr_auth";
+$DBName = "sharm12f_PHRAUTH";
 $DBHost = "localhost";
+
 
 if(!isset($_GET['email'])){
 	die("No email");
@@ -18,7 +19,7 @@ if($con->connect_error){
 	die("Connection error: " .  $con->connect_error);
 }
 
-$stmt = $con->prepare("select id, email, create_time, user_role, fname, lname, phone, region, province from users where email=?");
+$stmt = $con->prepare("SELECT ID, EMAIL, CREATE_TIME, USER_ROLE, FNAME, LNAME, PHONE, REGION, PROVINCE FROM USERS WHERE EMAIL=?");
 $stmt->bind_param("s",$email);
 $stmt->execute();
 $stmt->bind_result($dbid, $dbemail, $dbcreate_time, $dbuser_role, $db_fname, $db_lname, $db_phone, $db_region, $db_province);
