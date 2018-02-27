@@ -5,12 +5,11 @@ $DBName = "sharm12f_PHRAUTH";
 $DBHost = "localhost";
 
 
-if(!isset($_GET['fname']) || !isset($_GET['lname']) || !isset($_GET['email']) || !isset($_GET['phone']) || !isset($_GET['password']) || !isset($_GET['region']) || !isset($_GET['organization']) || !isset($_GET['department']) || !isset($_GET['health_professional'])){
+if(!isset(!isset($_GET['name']) || !isset($_GET['email']) || !isset($_GET['phone']) || !isset($_GET['password']) || !isset($_GET['region']) || !isset($_GET['organization']) || !isset($_GET['department']) || !isset($_GET['health_professional'])){
 	die("Not Enough Information");
 }
 else{
-	$fname = $_GET['fname'];
-	$lname = $_GET['lname'];
+	$name = $_GET['name'];
 	$email = $_GET['email'];
 	$phone = $_GET['phone'];
 	$password = $_GET['password'];
@@ -26,8 +25,8 @@ if($con->connect_error){
 	die("Connection error: " .  $con->connect_error);
 }
 $user_role="HP";
-$stmt = $con->prepare("INSERT INTO HEALTH_PROFESSIONAL_USER (FNAME, LNAME, EMAIL, PASSWORD, USER_ROLE, PHONE, REGION, ORGANIZATION, DEPARTMENT, HEALTH_PROFESSIONAL) VALUES (?,?,?,?,?,?,?,?,?,?)");
-$stmt->bind_param("ssssssssss", $fname, $lname, $email, $password, $user_role, $phone, $region, $organization, $department, $health_professional);
+$stmt = $con->prepare("INSERT INTO HEALTH_PROFESSIONAL_USER (NAME, EMAIL, PASSWORD, USER_ROLE, PHONE, REGION, ORGANIZATION, DEPARTMENT, HEALTH_PROFESSIONAL) VALUES (?,?,?,?,?,?,?,?,?)");
+$stmt->bind_param("sssssssss", $name, $email, $password, $user_role, $phone, $region, $organization, $department, $health_professional);
 if($stmt->execute()){
 	echo "true";
 }

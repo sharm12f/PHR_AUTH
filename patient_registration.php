@@ -6,12 +6,11 @@ $DBHost = "localhost";
 
 // Sample Url: patient_registration.php?fname=test&lname=test&email=test@test.com&phone=1231231234&password=password&region=Toronto&province=Ontario
 
-if(!isset($_GET['fname']) || !isset($_GET['lname']) || !isset($_GET['email']) || !isset($_GET['phone']) || !isset($_GET['password']) || !isset($_GET['region']) || !isset($_GET['province'])){
+if(!isset(!isset($_GET['name']) || !isset($_GET['email']) || !isset($_GET['phone']) || !isset($_GET['password']) || !isset($_GET['region']) || !isset($_GET['province'])){
 	die("Not Enough Information");
 }
 else{
-	$fname = $_GET['fname'];
-	$lname = $_GET['lname'];
+	$name = $_GET['name'];
 	$email = $_GET['email'];
 	$phone = $_GET['phone'];
 	$password = $_GET['password'];
@@ -27,8 +26,8 @@ if($con->connect_error){
 }
 
 $user_role='USER';
-$stmt = $con->prepare("INSERT INTO USERS (FNAME, LNAME, EMAIL, PASSWORD, USER_ROLE, PHONE, REGION, PROVINCE) VALUES (?,?,?,?,?,?,?,?)");
-$stmt->bind_param("ssssssss", $fname, $lname, $email, $password, $user_role, $phone, $region, $province);
+$stmt = $con->prepare("INSERT INTO USERS (NAME, EMAIL, PASSWORD, USER_ROLE, PHONE, REGION, PROVINCE) VALUES (?,?,?,?,?,?,?)");
+$stmt->bind_param("sssssss", $name, $email, $password, $user_role, $phone, $region, $province);
 if($stmt->execute()){
 	echo "true";
 }

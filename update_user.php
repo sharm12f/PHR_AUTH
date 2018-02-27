@@ -6,12 +6,11 @@ $DBHost = "localhost";
 
 // Sample Url: update_user.php?fname=test&lname=test&email=test@test.com&phone=1231231234&region=Windsor&province=Ontario
 
-if(!isset($_GET['fname']) || !isset($_GET['lname']) || !isset($_GET['email']) || !isset($_GET['phone']) || !isset($_GET['region']) || !isset($_GET['province'])){
+if(!isset($_GET['name']) || !isset($_GET['email']) || !isset($_GET['phone']) || !isset($_GET['region']) || !isset($_GET['province'])){
 	die("Not Enough Information");
 }
 else{
-	$fname = $_GET['fname'];
-	$lname = $_GET['lname'];
+	$name = $_GET['name'];
 	$email = $_GET['email'];
 	$phone = $_GET['phone'];
 	$region = $_GET['region'];
@@ -24,8 +23,8 @@ if($con->connect_error){
 	die("Connection error: " .  $con->connect_error);
 }
 $user_role="USER";
-$stmt = $con->prepare("UPDATE USERS SET FNAME=?, LNAME=?, EMAIL=?, PHONE=?, REGION=?, PROVINCE=? WHERE EMAIL=?");
-$stmt->bind_param("sssssss", $fname, $lname, $email, $phone, $region, $province, $email);
+$stmt = $con->prepare("UPDATE USERS SET NAME=?, EMAIL=?, PHONE=?, REGION=?, PROVINCE=? WHERE EMAIL=?");
+$stmt->bind_param("ssssss", $name, $email, $phone, $region, $province, $email);
 if($stmt->execute()){
 	echo "true";
 }
