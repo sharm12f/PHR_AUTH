@@ -7,7 +7,7 @@ $DBHost = "localhost";
 // Sample Url: patient_registration.php?fname=test&lname=test&email=test@test.com&phone=1231231234&password=password&region=Toronto&province=Ontario
 
 if(!isset(!isset($_GET['name']) || !isset($_GET['email']) || !isset($_GET['phone']) || !isset($_GET['password']) || !isset($_GET['region']) || !isset($_GET['province'])){
-	die("Not Enough Information");
+	die("error");
 }
 else{
 	$name = $_GET['name'];
@@ -17,12 +17,16 @@ else{
 	$region = $_GET['region'];
 	$province = $_GET['province'];
 	//check the username here for invalid chars die if fail.
+	$invalid_chars = '/[^A-Z a-z0-9.@#\\-$]/';
+	if(preg_match($invalid_chars,$name) || preg_match($invalid_chars,$email) || preg_match($invalid_chars,$phone) || preg_match($invalid_chars,$password) || preg_match($invalid_chars,$region) || preg_match(province)){
+		 die("error");
+	}
 }
 
 $con = new mysqli($DBHost, $DBUserName, $DBPassword, $DBName);
 
 if($con->connect_error){
-	die("Connection error: " .  $con->connect_error);
+	die("error");
 }
 
 $user_role='USER';

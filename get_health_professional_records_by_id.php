@@ -6,17 +6,21 @@ $DBHost = "localhost";
 
 
 if(!isset($_GET['id'])){
-	die("No id");
+	die("error");
 }
 else{
 	$id = $_GET['id'];
 
 	//check the username here for invalid chars die if fail.
+	$invalid_chars = '/[^A-Z a-z0-9.@#\\-$]/';
+	if(preg_match($invalid_chars,$id)){
+		die("error");
+	}
 }
 
 $con = new mysqli($DBHost, $DBUserName, $DBPassword, $DBName);
 if($con->connect_error){
-	die("Connection error: " .  $con->connect_error);
+	die("error");
 }
 $stmt = $con->prepare('SELECT HH.USER_HEALTH_RECORD_ID FROM HEALTH_PROFESSIONAL_USER AS H, HEALTH_PROFESSIONAL_HAS_USER_HEALTH_RECORD AS HH WHERE H.ID = HH.HEALTH_PROFESSIONAL_ID AND H.ID=?');
 $stmt->bind_param("s",$id);

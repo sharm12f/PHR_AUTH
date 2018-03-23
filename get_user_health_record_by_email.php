@@ -6,17 +6,21 @@ $DBHost = "localhost";
 
 
 if(!isset($_GET['email'])){
-	die("No email");
+	die("error");
 }
 else{
 	$email = $_GET['email'];
 
 	//check the username here for invalid chars die if fail.
+	$invalid_chars = '/[^A-Z a-z0-9.@#\\-$]/';
+	if(preg_match($invalid_chars,$email)){
+		die("error");
+	}
 }
 
 $con = new mysqli($DBHost, $DBUserName, $DBPassword, $DBName);
 if($con->connect_error){
-	die("Connection error: " .  $con->connect_error);
+	die("error");
 }
 $stmt = $con->prepare('SELECT H.ID, H.USER_ID, H.RECORD, H.CREATE_TIME, H.NAME FROM USER_HEALTH_RECORD AS H, USERS AS U WHERE U.ID = H.USER_ID AND U.EMAIL = ?');
 $stmt->bind_param("s",$email);
