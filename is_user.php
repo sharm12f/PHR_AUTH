@@ -1,15 +1,16 @@
 <?PHP
-$DBUserName = "app";
+$DBUserName = "sharm12f_app";
 $DBPassword = "password";
-$DBName = "phr_auth";
+$DBName = "sharm12f_PHRAUTH";
 $DBHost = "localhost";
 
-if(!isset($_GET['email']) || !isset($_GET['password'])){
+
+if(!isset($_POST['email']) || !isset($_POST['password'])){
 	die("No email or password");
 }
 else{
-	$email = $_GET['email'];
-	$password = $_GET['password'];
+	$email = $_POST['email'];
+	$password = $_POST['password'];
 	//check the username here for invalid chars die if fail.
 }
 
@@ -18,7 +19,7 @@ if($con->connect_error){
 	die("Connection error: " .  $con->connect_error);
 }
 
-$stmt = $con->prepare("select password from users where email=?");
+$stmt = $con->prepare("SELECT PASSWORD FROM USERS WHERE EMAIL=?");
 $stmt->bind_param("s",$email);
 $stmt->execute();
 $stmt->bind_result($dbpassword);

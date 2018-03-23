@@ -5,11 +5,11 @@ $DBName = "sharm12f_PHRAUTH";
 $DBHost = "localhost";
 
 
-if(!isset($_GET['email'])){
-	die("No email");
+if(!isset($_GET['id'])){
+	die("No id");
 }
 else{
-	$email = $_GET['email'];
+	$id = $_GET['id'];
 
 	//check the username here for invalid chars die if fail.
 }
@@ -18,14 +18,14 @@ $con = new mysqli($DBHost, $DBUserName, $DBPassword, $DBName);
 if($con->connect_error){
 	die("Connection error: " .  $con->connect_error);
 }
-$stmt = $con->prepare('SELECT H.ID, H.USER_ID, H.RECORD, H.CREATE_TIME, H.NAME FROM USER_HEALTH_RECORD AS H, USERS AS U WHERE U.ID = H.USER_ID AND U.EMAIL = ?');
-$stmt->bind_param("s",$email);
+$stmt = $con->prepare('SELECT HH.USER_HEALTH_RECORD_ID FROM HEALTH_PROFESSIONAL_USER AS H, HEALTH_PROFESSIONAL_HAS_USER_HEALTH_RECORD AS HH WHERE H.ID = HH.HEALTH_PROFESSIONAL_ID AND H.ID=?');
+$stmt->bind_param("s",$id);
 $stmt->execute();
-$stmt->bind_result($rid, $uid, $record, $create_time, $db_name);
+$stmt->bind_result($rid);
 $count = 0;
 $results =  array();
 while($stmt->fetch()){
-	$row = array('rid'=>$rid, 'uid'=>$uid, 'record'=>$record, 'create_time'=>$create_time, 'name'=>$db_name);
+	$row = array('rid'=>$rid);
 	$key="".$count;
 	$results[]=$row;
 	$count = $count+1;

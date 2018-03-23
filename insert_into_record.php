@@ -1,7 +1,7 @@
 <?PHP
-$DBUserName = "app";
+$DBUserName = "sharm12f_app";
 $DBPassword = "password";
-$DBName = "phr_auth";
+$DBName = "sharm12f_PHRAUTH";
 $DBHost = "localhost";
 
 if(!isset($_GET['name']) || !isset($_GET['description']) || !isset($_GET['uid'])){
@@ -19,7 +19,7 @@ if($con->connect_error){
 	die("Connection error: " .  $con->connect_error);
 }
 
-$stmt = $con->prepare("insert into user_health_record (name, record, user_id) values (?,?,?)");
+$stmt = $con->prepare("INSERT INTO USER_HEALTH_RECORD (NAME, RECORD, USER_ID) VALUES (?,?,?)");
 $stmt->bind_param("ssi",$name, $description, $uid);
 if($stmt->execute()){
 	echo "true";

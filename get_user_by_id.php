@@ -5,11 +5,11 @@ $DBName = "sharm12f_PHRAUTH";
 $DBHost = "localhost";
 
 
-if(!isset($_GET['email'])){
-	die("No email");
+if(!isset($_GET['id'])){
+	die("No id");
 }
 else{
-	$email = $_GET['email'];
+	$id = $_GET['id'];
 
 	//check the username here for invalid chars die if fail.
 }
@@ -19,8 +19,8 @@ if($con->connect_error){
 	die("Connection error: " .  $con->connect_error);
 }
 
-$stmt = $con->prepare("SELECT ID, EMAIL, CREATE_TIME, USER_ROLE, NAME, PHONE, REGION, PROVINCE FROM USERS WHERE EMAIL=?");
-$stmt->bind_param("s",$email);
+$stmt = $con->prepare("SELECT ID, EMAIL, CREATE_TIME, USER_ROLE, NAME, PHONE, REGION, PROVINCE FROM USERS WHERE ID=?");
+$stmt->bind_param("s",$id);
 $stmt->execute();
 $stmt->bind_result($dbid, $dbemail, $dbcreate_time, $dbuser_role, $db_name, $db_phone, $db_region, $db_province);
 $count = 0;
