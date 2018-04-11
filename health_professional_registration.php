@@ -5,18 +5,18 @@ $DBName = "sharm12f_PHRAUTH";
 $DBHost = "localhost";
 
 
-if(!isset(!isset($_GET['name']) || !isset($_GET['email']) || !isset($_GET['phone']) || !isset($_GET['password']) || !isset($_GET['region']) || !isset($_GET['organization']) || !isset($_GET['department']) || !isset($_GET['health_professional'])){
+if(!isset($_POST['name']) || !isset($_POST['email']) || !isset($_POST['phone']) || !isset($_POST['password']) || !isset($_POST['region']) || !isset($_POST['organization']) || !isset($_POST['department']) || !isset($_POST['health_professional'])){
 	die("error");
 }
 else{
-	$name = $_GET['name'];
-	$email = $_GET['email'];
-	$phone = $_GET['phone'];
-	$password = $_GET['password'];
-	$region = $_GET['region'];
-	$organization = $_GET['organization'];
-	$department = $_GET['department'];
-	$health_professional = $_GET['health_professional'];
+	$name = $_POST['name'];
+	$email = $_POST['email'];
+	$phone = $_POST['phone'];
+	$password = $_POST['password'];
+	$region = $_POST['region'];
+	$organization = $_POST['organization'];
+	$department = $_POST['department'];
+	$health_professional = $_POST['health_professional'];
 	
 	//check the username here for invalid chars die if fail.
 	$invalid_chars = '/[^A-Z a-z0-9.@#\\-$]/';

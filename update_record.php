@@ -5,13 +5,13 @@ $DBName = "sharm12f_PHRAUTH";
 $DBHost = "localhost";
 
 
-if(!isset($_GET['name']) || !isset($_GET['description']) || !isset($_GET['rid'])){
+if(!isset($_POST['name']) || !isset($_POST['description']) || !isset($_POST['rid'])){
 	die("error");
 }
 else{
-	$name = $_GET['name'];
-	$description = $_GET['description'];
-	$rid = $_GET['rid'];
+	$name = $_POST['name'];
+	$description = $_POST['description'];
+	$rid = $_POST['rid'];
 	//check the username here for invalid chars die if fail.
 	$invalid_chars = '/[^A-Z a-z0-9.@#\\-$]/';
 	if(preg_match($invalid_chars,$name) || preg_match($invalid_chars,$description) || preg_match($invalid_chars,$rid)){

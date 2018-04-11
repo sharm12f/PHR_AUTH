@@ -6,16 +6,16 @@ $DBHost = "localhost";
 
 // Sample Url: patient_registration.php?fname=test&lname=test&email=test@test.com&phone=1231231234&password=password&region=Toronto&province=Ontario
 
-if(!isset(!isset($_GET['name']) || !isset($_GET['email']) || !isset($_GET['phone']) || !isset($_GET['password']) || !isset($_GET['region']) || !isset($_GET['province'])){
-	die("error");
+if(!isset($_POST['name']) || !isset($_POST['email']) || !isset($_POST['phone']) || !isset($_POST['password']) || !isset($_POST['region']) || !isset($_POST['province'])){
+	die("Some error");
 }
 else{
-	$name = $_GET['name'];
-	$email = $_GET['email'];
-	$phone = $_GET['phone'];
-	$password = $_GET['password'];
-	$region = $_GET['region'];
-	$province = $_GET['province'];
+	$name = $_POST['name'];
+	$email = $_POST['email'];
+	$phone = $_POST['phone'];
+	$password = $_POST['password'];
+	$region = $_POST['region'];
+	$province = $_POST['province'];
 	//check the username here for invalid chars die if fail.
 	$invalid_chars = '/[^A-Z a-z0-9.@#\\-$]/';
 	if(preg_match($invalid_chars,$name) || preg_match($invalid_chars,$email) || preg_match($invalid_chars,$phone) || preg_match($invalid_chars,$password) || preg_match($invalid_chars,$region) || preg_match(province)){
@@ -26,7 +26,7 @@ else{
 $con = new mysqli($DBHost, $DBUserName, $DBPassword, $DBName);
 
 if($con->connect_error){
-	die("error");
+	die("Some other error");
 }
 
 $user_role='USER';

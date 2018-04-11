@@ -6,11 +6,11 @@ $DBHost = "localhost";
 
 // Sample Url: user_exists.php?email=test@test.com
 
-if(!isset($_GET['email'])){
+if(!isset($_POST['email'])){
 	die("error");
 }
 else{
-	$email = $_GET['email'];
+	$email = $_POST['email'];
 	//check the username here for invalid chars die if fail.//check the username here for invalid chars die if fail.
 	$invalid_chars = '/[^A-Z a-z0-9.@#\\-$]/';
 	if(preg_match($invalid_chars,$email)){
