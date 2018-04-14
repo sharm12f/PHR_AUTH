@@ -22,10 +22,10 @@ if($con->connect_error){
 	die("error");
 }
 
-$stmt = $con->prepare("SELECT ID, EMAIL, CREATE_TIME, USER_ROLE, NAME, PHONE, REGION, ORGANIZATION, DEPARTMENT, HEALTH_PROFESSIONAL FROM HEALTH_PROFESSIONAL_USER WHERE EMAIL=?");
+$stmt = $con->prepare("SELECT ID, EMAIL, CREATE_TIME, USER_ROLE, NAME, PHONE, REGION, PROVINCE, ORGANIZATION, DEPARTMENT, HEALTH_PROFESSIONAL FROM HEALTH_PROFESSIONAL_USER WHERE EMAIL=?");
 $stmt->bind_param("s",$email);
 $stmt->execute();
-$stmt->bind_result($dbid, $dbemail, $dbcreate_time, $dbuser_role, $db_name, $db_phone, $db_region, $db_organization, $db_department, $db_health);
+$stmt->bind_result($dbid, $dbemail, $dbcreate_time, $dbuser_role, $db_name, $db_phone, $db_region, $db_province, $db_organization, $db_department, $db_health);
 $count = 0;
 while($stmt->fetch()){
 	$count=$count+1;
@@ -35,7 +35,7 @@ if($count!=1){
 	die("error what");
 }
 
-$user = array('id'=>$dbid, 'email'=>$dbemail, 'create_time'=>$dbcreate_time, 'user_role'=>$dbuser_role, 'name'=>$db_name, 'phone'=>$db_phone, 'region'=>$db_region, 'organization'=>$db_organization, 'department'=>$db_department, 'health_professional'=>$db_health);
+$user = array('id'=>$dbid, 'email'=>$dbemail, 'create_time'=>$dbcreate_time, 'user_role'=>$dbuser_role, 'name'=>$db_name, 'phone'=>$db_phone, 'region'=>$db_region, 'province'=>$db_province, 'organization'=>$db_organization, 'department'=>$db_department, 'health_professional'=>$db_health);
 
 $JSONUser = json_encode($user);
 

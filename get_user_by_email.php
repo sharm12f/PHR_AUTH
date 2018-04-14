@@ -23,10 +23,10 @@ if($con->connect_error){
 	die("error");
 }
 
-$stmt = $con->prepare("SELECT ID, EMAIL, CREATE_TIME, USER_ROLE, NAME, PHONE, REGION, PROVINCE FROM USERS WHERE EMAIL=?");
+$stmt = $con->prepare("SELECT ID, EMAIL, CREATE_TIME, USER_ROLE, NAME, PHONE, REGION, PROVINCE, LOGIN FROM USERS WHERE EMAIL=?");
 $stmt->bind_param("s",$email);
 $stmt->execute();
-$stmt->bind_result($dbid, $dbemail, $dbcreate_time, $dbuser_role, $db_name, $db_phone, $db_region, $db_province);
+$stmt->bind_result($dbid, $dbemail, $dbcreate_time, $dbuser_role, $db_name, $db_phone, $db_region, $db_province, $db_login);
 $count = 0;
 while($stmt->fetch()){
 	$count=$count+1;
@@ -36,7 +36,7 @@ if($count!=1){
 	die("error");
 }
 
-$user = array('id'=>$dbid, 'email'=>$dbemail, 'create_time'=>$dbcreate_time, 'user_role'=>$dbuser_role, 'name'=>$db_name, 'phone'=>$db_phone, 'region'=>$db_region, 'province'=>$db_province);
+$user = array('id'=>$dbid, 'email'=>$dbemail, 'create_time'=>$dbcreate_time, 'user_role'=>$dbuser_role, 'name'=>$db_name, 'phone'=>$db_phone, 'region'=>$db_region, 'province'=>$db_province, 'login'=>$db_login);
 
 $JSONUser = json_encode($user);
 

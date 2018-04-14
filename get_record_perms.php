@@ -22,13 +22,13 @@ if($con->connect_error){
 	die("Connection error: " .  $con->connect_error);
 }
 
-$stmt = $con->prepare("SELECT HP.ID, HP.NAME, R.ID, R.NAME, P.ID FROM HEALTH_PROFESSIONAL_USER AS HP, HEALTH_PROFESSIONAL_HAS_USER_HEALTH_RECORD AS P, USER_HEALTH_RECORD AS R WHERE P.USER_HEALTH_RECORD_ID = ? AND P.HEALTH_PROFESSIONAL_ID = HP.ID AND  P.USER_HEALTH_RECORD_ID = R.ID");
+$stmt = $con->prepare("SELECT HP.ID, HP.NAME, R.ID, R.NAME, P.ID, P.CREATE_TIME FROM HEALTH_PROFESSIONAL_USER AS HP, HEALTH_PROFESSIONAL_HAS_USER_HEALTH_RECORD AS P, USER_HEALTH_RECORD AS R WHERE P.USER_HEALTH_RECORD_ID = ? AND P.HEALTH_PROFESSIONAL_ID = HP.ID AND  P.USER_HEALTH_RECORD_ID = R.ID");
 $stmt->bind_param("i",$id);
 $stmt->execute();
-$stmt->bind_result($dbhpid, $dbhpname, $dbrid, $dbrname, $dbpid);
+$stmt->bind_result($dbhpid, $dbhpname, $dbrid, $dbrname, $dbpid, $db_create_time);
 $results = array();
 while($stmt->fetch()){
-	$row = array('hpid'=>$dbhpid, 'hpname'=>$dbhpname, 'rid'=> $dbrid, 'rname'=>$dbrname, 'pid'=>$dbpid);
+	$row = array('hpid'=>$dbhpid, 'hpname'=>$dbhpname, 'rid'=> $dbrid, 'rname'=>$dbrname, 'pid'=>$dbpid, 'create_time'=>$db_create_time);
 	$results[]=$row;
 }
 $JSONObj = json_encode($results);

@@ -6,7 +6,7 @@ $DBHost = "localhost";
 
 $bitset="";
 
-$query = "SELECT EMAIL FROM HEALTH_PROFESSIONAL_USER WHERE";
+$query = "SELECT EMAIL FROM HEALTH_PROFESSIONAL_USER";
 if(isset($_POST['region'])){
 	$region=$_POST['region'];
 	if(substr($query,-1) == "D"){
@@ -16,9 +16,23 @@ if(isset($_POST['region'])){
 		$query .= "AND REGION = '".$region."' ";
 	}
 	else{
-		$query .= " REGION = '".$region."' ";
+		$query .= " WHERE REGION = '".$region."' ";
 	}
 }
+
+if(isset($_POST['province'])){
+	$province=$_POST['province'];
+	if(substr($query,-1) == "D"){
+		$query .= " PROVINCE = '".$province."'AND";
+	}
+	else if (substr($query,-1) == " "){
+		$query .= "AND PROVINCE = '".$province."' ";
+	}
+	else{
+		$query .= " WHERE PROVINCE = '".$province."' ";
+	}
+}
+
 if(isset($_POST['organization'])){
 	$organization=$_POST['organization'];
 	if(substr($query,-1) == "D"){
@@ -28,7 +42,7 @@ if(isset($_POST['organization'])){
 		$query .= "AND ORGANIZATION = '".$organization."' ";	
 	}
 	else{
-		$query .= " ORGANIZATION = '".$organization."' ";
+		$query .= " WHERE ORGANIZATION = '".$organization."' ";
 	}
 }
 if(isset($_POST['department'])){
@@ -40,7 +54,7 @@ if(isset($_POST['department'])){
 		$query .= "AND DEPARTMENT = '".$department."' ";	
 	}
 	else{
-		$query .= " DEPARTMENT = '".$department."' ";	
+		$query .= " WHERE DEPARTMENT = '".$department."' ";	
 	}
 }
 if(isset($_POST['healthProfessional'])){
@@ -52,7 +66,7 @@ if(isset($_POST['healthProfessional'])){
 		$query .= "AND HEALTH_PROFESSIONAL = '".$healthProfessional."' ";	
 	}
 	else{
-		$query .= " HEALTH_PROFESSIONAL = '".$healthProfessional."' ";	
+		$query .= " WHERE HEALTH_PROFESSIONAL = '".$healthProfessional."' ";	
 	}
 }
 
