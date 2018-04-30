@@ -22,14 +22,14 @@ $con = new mysqli($DBHost, $DBUserName, $DBPassword, $DBName);
 if($con->connect_error){
 	die("error");
 }
-$stmt = $con->prepare('SELECT H.ID, H.USER_ID, H.RECORD, H.CREATE_TIME, H.NAME FROM USER_HEALTH_RECORD AS H, USERS AS U WHERE U.ID = H.USER_ID AND U.EMAIL = ?');
+$stmt = $con->prepare('SELECT H.ID, H.USER_ID, H.RECORD, H.CREATE_TIME, H.NAME, H.FILENAME FROM USER_HEALTH_RECORD AS H, USERS AS U WHERE U.ID = H.USER_ID AND U.EMAIL = ?');
 $stmt->bind_param("s",$email);
 $stmt->execute();
-$stmt->bind_result($rid, $uid, $record, $create_time, $db_name);
+$stmt->bind_result($rid, $uid, $record, $create_time, $db_name, $db_filename);
 $count = 0;
 $results =  array();
 while($stmt->fetch()){
-	$row = array('rid'=>$rid, 'uid'=>$uid, 'record'=>$record, 'create_time'=>$create_time, 'name'=>$db_name);
+	$row = array('rid'=>$rid, 'uid'=>$uid, 'record'=>$record, 'create_time'=>$create_time, 'name'=>$db_name, 'filename'=>$db_filename);
 	$key="".$count;
 	$results[]=$row;
 	$count = $count+1;

@@ -9,6 +9,9 @@ if(!isset($_POST['name']) || !isset($_POST['description']) || !isset($_POST['rid
 	die("error");
 }
 else{
+	if(isset($_POST['filename'])){
+		$filename = $_POST['filename'];
+	}
 	$name = $_POST['name'];
 	$description = $_POST['description'];
 	$rid = $_POST['rid'];
@@ -24,8 +27,14 @@ if($con->connect_error){
 	die("error");
 }
 
-$stmt = $con->prepare("UPDATE USER_HEALTH_RECORD SET NAME = ?, RECORD = ? WHERE ID = ?");
-$stmt->bind_param("ssi",$name, $description, $rid);
+if(!isset($_POST['filename'])){
+	$stmt = $con->prepare("UPDATE USER_HEALTH_RECORD SET NAME = ?, RECORD = ? WHERE ID = ?");
+	$stmt->bind_param("ssi",$name, $description, $rid);
+}
+else{
+	$stmt = $con->prepare("UPDATE USER_HEALTH_RECORD SET NAME = ?, RECORD = ?, FILENAME = ? WHERE ID = ?");
+	$stmt->bind_param("sssi",$name, $description, $filename, $rid);
+}
 if($stmt->execute()){
 	echo "true";
 }
